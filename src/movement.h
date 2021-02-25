@@ -15,3 +15,6 @@ void stopMotors();
 void updateControllerStats();
 void changeSpeedGrow();
 void changeSpeedShrink();
+void cameraAutoSpin();
+void elevatorReject();
+void elevatorUp();
