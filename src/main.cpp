@@ -2,9 +2,13 @@
 // Robot Configuration:
 // [Name]               [Type]        [Port(s)]
 // Controller1          controller                    
-// Rightmotor           motor         1               
-// Leftmotor            motor         11              
-// Armmotor             motor         10              
+// TLMotor              motor         12              
+// TRMotor              motor         13              
+// BRMotor              motor         9               
+// BLMotor              motor         10              
+// BElevator            motor         14              
+// TElevator            motor         11              
+// Color_Detection      vision        8               
 // ---- END VEXCODE CONFIGURED DEVICES ----
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
@@ -15,13 +19,6 @@
 /*                                                                            */
 /*----------------------------------------------------------------------------*/
 
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// Controller1          controller                    
-// Rightmotor           motor         1               
-// Leftmotor            motor         11              
-// ---- END VEXCODE CONFIGURED DEVICES ----
 
 #include "vex.h"
 #include "movement.h"
@@ -95,29 +92,18 @@ void enableDebuggerMode(){
     debug_mode = 0x1;
 }
 
-void BElevatorControl(){
-  BElevator.setVelocity(40 * speed, pct);
-  BElevator.spin(reverse);
-  TElevator.setVelocity(40 * speed, pct);
-  TElevator.spin(forward);
-}
-
-void BElevatorControlB(){
-  BElevator.setVelocity(40 * speed, pct);
-  BElevator.spin(reverse);
-  TElevator.setVelocity(40 * speed, pct);
-  TElevator.spin(reverse);
-}
-
 void usercontrol(void) {
   Controller1.ButtonR1.pressed(changeSpeedGrow);
   Controller1.ButtonR2.pressed(changeSpeedShrink);
   Controller1.ButtonX.pressed(changeMode);
   Controller1.ButtonL1.pressed(enableDebuggerMode);
 
-  Controller1.ButtonUp.pressed(BElevatorControlB);
-  Controller1.ButtonDown.pressed(BElevatorControl);
+  Controller1.ButtonUp.pressed(elevatorUp);
+  Controller1.ButtonDown.pressed(elevatorReject);
 
+  Color_Detection.setLedMode(vex::vision::ledMode::manual);
+  Color_Detection.setLedColor(255, 255, 255);
+  Color_Detection.setLedBrightness(100);
   // User control code here, inside the loop
   while (1) {
     // This is the main execution loop for the user control program.
@@ -132,12 +118,13 @@ void usercontrol(void) {
     updateControllerStats();
     if(currentMode == DRIVE){
       moveRobot();
+      cameraAutoSpin();
     }else{
       moveArm();
     }
 
     stopMotors();
-    wait(20, msec); // Sleep the task for a short amount of time to
+    wait(100, msec); // Sleep the task for a short amount of time to
                     // prevent wasted resources.
   }
 }
