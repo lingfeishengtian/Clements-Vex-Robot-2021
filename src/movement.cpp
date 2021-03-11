@@ -23,13 +23,18 @@ void elevatorUp(){
   TElevator.spin(reverse);
 }
 
+uint32_t blueNum;
+uint32_t redNum;
+uint32_t cycles;
+
 void cameraAutoSpin(){
-  uint32_t blueNum = Color_Detection.takeSnapshot(Color_Detection__BLUEBALL);
-  uint32_t redNum = Color_Detection.takeSnapshot(Color_Detection__REDBALL);
+   blueNum = Color_Detection.takeSnapshot(Color_Detection__BLUEBALL);
+   redNum = Color_Detection.takeSnapshot(Color_Detection__REDBALL);
+   cycles = 2;
   
   if(blueNum > 0 || redNum > 0){
     //autoSpin = true;
-    elevatorUp();
+    //elevatorUp();
   }else{
     autoSpin = false;
   }
@@ -85,7 +90,7 @@ void updateControllerStats(){
   Controller1.Screen.setCursor(1,1);
   Controller1.Screen.print("Speed: %f", speed);
   Controller1.Screen.newLine();
-  Controller1.Screen.print("Current Mode: %s", currentMode == DRIVE ? "Drive" : "Ramp");
+  Controller1.Screen.print("红: %d 蓝: %d", redNum, blueNum);
 
   double batPercent = Brain.Battery.capacity();
   if(debug_mode){

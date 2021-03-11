@@ -17,7 +17,7 @@ motor BElevator = motor(PORT14, ratio18_1, false);
 motor TElevator = motor(PORT11, ratio18_1, false);
 /*vex-vision-config:begin*/
 signature Color_Detection__REDBALL = signature (1, 5957, 9929, 7943, -3073, -1111, -2092, 1.4, 0);
-signature Color_Detection__BLUEBALL = signature (2, -3723, -1251, -2487, 3061, 10601, 6831, 0.9, 0);
+signature Color_Detection__BLUEBALL = signature (2, -3497, -2313, -2906, 6553, 9279, 7916, 1.6, 0);
 signature Color_Detection__SIG_3 = signature (3, 0, 0, 0, 0, 0, 0, 3, 0);
 signature Color_Detection__SIG_4 = signature (4, 0, 0, 0, 0, 0, 0, 3, 0);
 signature Color_Detection__SIG_5 = signature (5, 0, 0, 0, 0, 0, 0, 3, 0);
