@@ -7,6 +7,7 @@ using namespace vex;
 Mode currentMode = DRIVE;
 double speed = 1.0;
 
+
 bool autoSpin = false;
 
 void elevatorReject(){
@@ -23,18 +24,28 @@ void elevatorUp(){
   TElevator.spin(reverse);
 }
 
+void elevatorPush(){
+  BElevator.setVelocity(40 * speed, pct);
+  BElevator.spin(forward);
+  TElevator.setVelocity(40 * speed, pct);
+  TElevator.spin(forward);
+}
 uint32_t blueNum;
 uint32_t redNum;
+uint32_t rednblueNum;
 uint32_t cycles;
+
 
 void cameraAutoSpin(){
    blueNum = Color_Detection.takeSnapshot(Color_Detection__BLUEBALL);
    redNum = Color_Detection.takeSnapshot(Color_Detection__REDBALL);
+   rednblueNum = Color_Detection.takeSnapshot(Color_Detection__BLUEBALL)+Color_Detection.takeSnapshot(Color_Detection__REDBALL);
    cycles = 2;
   
   if(blueNum > 0 || redNum > 0){
-    //autoSpin = true;
-    //elevatorUp();
+    autoSpin = true;
+    elevatorUp();
+    wait(2, sec);
   }else{
     autoSpin = false;
   }
@@ -55,7 +66,7 @@ void moveRobot(){
 }
 
 void stopMotors(){
-  if(!Controller1.ButtonUp.pressing() && !Controller1.ButtonDown.pressing() && !autoSpin){
+  if(!Controller1.ButtonUp.pressing() && !Controller1.ButtonDown.pressing() && !Controller1.ButtonLeft.pressing() && !autoSpin){
     BElevator.stop();
     TElevator.stop();
   }  
@@ -67,21 +78,9 @@ void stopMotors(){
   }
 }
 
-void moveArm(){
-    // Armmotor2.setVelocity(5, pct);
-    // Armmotor2.spinFor(rot, 40, deg, false);
-
-  // if(Controller1.ButtonA.pressing()){
-  //   GrabbyBits.setVelocity(20, pct);
-  //   GrabbyBits.spin(fwd);
-  // }
-  // if(Controller1.ButtonY.pressing()){
-  //   GrabbyBits.stop();
-  // }
-  // if(Controller1.Axis3.position(percentUnits::pct)>0){
-  //   grabMotor.setVelocity(50, pct);
-  //   grabMotor.spinFor()
-  // }
+void mElevator(){
+  
+ 
 }
 
 
@@ -90,7 +89,11 @@ void updateControllerStats(){
   Controller1.Screen.setCursor(1,1);
   Controller1.Screen.print("Speed: %f", speed);
   Controller1.Screen.newLine();
-  Controller1.Screen.print("红: %d 蓝: %d", redNum, blueNum);
+  Controller1.Screen.print("R: %d B: %d ", redNum, blueNum);
+  Controller1.Screen.newLine();
+  Controller1.Screen.print("R&B：%d", rednblueNum);
+  Controller1.Screen.newLine();
+
 
   double batPercent = Brain.Battery.capacity();
   if(debug_mode){

@@ -2,6 +2,174 @@
 // Robot Configuration:
 // [Name]               [Type]        [Port(s)]
 // Controller1          controller                    
+// TLMotor              motor         20              
+// TRMotor              motor         11              
+// BRMotor              motor         16              
+// BLMotor              motor         2               
+// BElevator            motor         12              
+// TElevator            motor         1               
+// Color_Detection      vision        15              
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// TLMotor              motor         20              
+// TRMotor              motor         5               
+// BRMotor              motor         16              
+// BLMotor              motor         2               
+// BElevator            motor         12              
+// TElevator            motor         1               
+// Color_Detection      vision        15              
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// TLMotor              motor         20              
+// TRMotor              motor         5               
+// BRMotor              motor         3               
+// BLMotor              motor         2               
+// BElevator            motor         12              
+// TElevator            motor         1               
+// Color_Detection      vision        15              
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// TLMotor              motor         20              
+// TRMotor              motor         5               
+// BRMotor              motor         3               
+// BLMotor              motor         11              
+// BElevator            motor         12              
+// TElevator            motor         1               
+// Color_Detection      vision        15              
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// TLMotor              motor         20              
+// TRMotor              motor         2               
+// BRMotor              motor         3               
+// BLMotor              motor         11              
+// BElevator            motor         12              
+// TElevator            motor         1               
+// Color_Detection      vision        15              
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// TLMotor              motor         16              
+// TRMotor              motor         2               
+// BRMotor              motor         3               
+// BLMotor              motor         11              
+// BElevator            motor         12              
+// TElevator            motor         1               
+// Color_Detection      vision        15              
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// TLMotor              motor         16              
+// TRMotor              motor         2               
+// BRMotor              motor         20              
+// BLMotor              motor         11              
+// BElevator            motor         12              
+// TElevator            motor         1               
+// Color_Detection      vision        15              
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// TLMotor              motor         16              
+// TRMotor              motor         2               
+// BRMotor              motor         20              
+// BLMotor              motor         11              
+// BElevator            motor         12              
+// TElevator            motor         1               
+// Color_Detection      vision        8               
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// TLMotor              motor         16              
+// TRMotor              motor         2               
+// BRMotor              motor         20              
+// BLMotor              motor         11              
+// BElevator            motor         14              
+// TElevator            motor         1               
+// Color_Detection      vision        8               
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// TLMotor              motor         16              
+// TRMotor              motor         2               
+// BRMotor              motor         20              
+// BLMotor              motor         10              
+// BElevator            motor         14              
+// TElevator            motor         1               
+// Color_Detection      vision        8               
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// TLMotor              motor         16              
+// TRMotor              motor         2               
+// BRMotor              motor         20              
+// BLMotor              motor         10              
+// BElevator            motor         14              
+// TElevator            motor         11              
+// Color_Detection      vision        8               
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// TLMotor              motor         16              
+// TRMotor              motor         2               
+// BRMotor              motor         20              
+// BLMotor              motor         10              
+// BElevator            motor         14              
+// TElevator            motor         11              
+// Color_Detection      vision        8               
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// TLMotor              motor         16              
+// TRMotor              motor         2               
+// BRMotor              motor         9               
+// BLMotor              motor         10              
+// BElevator            motor         14              
+// TElevator            motor         11              
+// Color_Detection      vision        8               
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
+// TLMotor              motor         16              
+// TRMotor              motor         13              
+// BRMotor              motor         9               
+// BLMotor              motor         10              
+// BElevator            motor         14              
+// TElevator            motor         11              
+// Color_Detection      vision        8               
+// ---- END VEXCODE CONFIGURED DEVICES ----
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// Controller1          controller                    
 // TLMotor              motor         12              
 // TRMotor              motor         13              
 // BRMotor              motor         9               
@@ -99,7 +267,8 @@ void usercontrol(void) {
   Controller1.ButtonL1.pressed(enableDebuggerMode);
 
   Controller1.ButtonUp.pressed(elevatorUp);
-  Controller1.ButtonDown.pressed(elevatorReject);
+  Controller1.ButtonDown.pressed(elevatorPush);
+  Controller1.ButtonLeft.pressed(elevatorReject);
 
   Color_Detection.setLedMode(vex::vision::ledMode::manual);
   Color_Detection.setLedColor(255, 255, 255);
@@ -120,7 +289,7 @@ void usercontrol(void) {
       moveRobot();
       cameraAutoSpin();
     }else{
-      moveArm();
+      mElevator();
     }
 
     stopMotors();

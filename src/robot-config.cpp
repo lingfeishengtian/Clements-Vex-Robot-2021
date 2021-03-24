@@ -9,12 +9,12 @@ brain  Brain;
 
 // VEXcode device constructors
 controller Controller1 = controller(primary);
-motor TLMotor = motor(PORT12, ratio18_1, false);
-motor TRMotor = motor(PORT13, ratio18_1, false);
-motor BRMotor = motor(PORT9, ratio18_1, false);
-motor BLMotor = motor(PORT10, ratio18_1, false);
-motor BElevator = motor(PORT14, ratio18_1, false);
-motor TElevator = motor(PORT11, ratio18_1, false);
+motor TLMotor = motor(PORT20, ratio18_1, false);
+motor TRMotor = motor(PORT11, ratio18_1, false);
+motor BRMotor = motor(PORT16, ratio18_1, false);
+motor BLMotor = motor(PORT2, ratio18_1, false);
+motor BElevator = motor(PORT12, ratio18_1, false);
+motor TElevator = motor(PORT1, ratio18_1, false);
 /*vex-vision-config:begin*/
 signature Color_Detection__REDBALL = signature (1, 5957, 9929, 7943, -3073, -1111, -2092, 1.4, 0);
 signature Color_Detection__BLUEBALL = signature (2, -3497, -2313, -2906, 6553, 9279, 7916, 1.6, 0);
@@ -23,7 +23,7 @@ signature Color_Detection__SIG_4 = signature (4, 0, 0, 0, 0, 0, 0, 3, 0);
 signature Color_Detection__SIG_5 = signature (5, 0, 0, 0, 0, 0, 0, 3, 0);
 signature Color_Detection__SIG_6 = signature (6, 0, 0, 0, 0, 0, 0, 3, 0);
 signature Color_Detection__SIG_7 = signature (7, 0, 0, 0, 0, 0, 0, 3, 0);
-vision Color_Detection = vision (PORT8, 50, Color_Detection__REDBALL, Color_Detection__BLUEBALL, Color_Detection__SIG_3, Color_Detection__SIG_4, Color_Detection__SIG_5, Color_Detection__SIG_6, Color_Detection__SIG_7);
+vision Color_Detection = vision (PORT15, 50, Color_Detection__REDBALL, Color_Detection__BLUEBALL, Color_Detection__SIG_3, Color_Detection__SIG_4, Color_Detection__SIG_5, Color_Detection__SIG_6, Color_Detection__SIG_7);
 /*vex-vision-config:end*/
 
 // VEXcode generated functions

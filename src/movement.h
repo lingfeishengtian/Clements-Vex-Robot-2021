@@ -10,7 +10,7 @@ extern int8_t debug_mode;
 extern double speed;
 
 void moveRobot();
-void moveArm();
+void mElevator();
 void stopMotors();
 void updateControllerStats();
 void changeSpeedGrow();
@@ -18,3 +18,4 @@ void changeSpeedShrink();
 void cameraAutoSpin();
 void elevatorReject();
 void elevatorUp();
+void elevatorPush();
