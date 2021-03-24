@@ -19,7 +19,7 @@ void elevatorReject(){
 void elevatorUp(){
   BElevator.setVelocity(40 * speed, pct);
   BElevator.spin(reverse);
-  TElevator.setVelocity(40 * speed, pct);
+TElevator.setVelocity(4`0 * speed, pct);
   TElevator.spin(reverse);
 }
 
