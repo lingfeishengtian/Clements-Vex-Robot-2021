@@ -20,7 +20,7 @@ void elevatorReject(){
 void elevatorUp(){
   BElevator.setVelocity(40 * speed, pct);
   BElevator.spin(reverse);
-TElevator.setVelocity(4`0 * speed, pct);
+TElevator.setVelocity(40 * speed, pct);
   TElevator.spin(reverse);
 }
 
@@ -40,15 +40,15 @@ void cameraAutoSpin(){
    blueNum = Color_Detection.takeSnapshot(Color_Detection__BLUEBALL);
    redNum = Color_Detection.takeSnapshot(Color_Detection__REDBALL);
    rednblueNum = Color_Detection.takeSnapshot(Color_Detection__BLUEBALL)+Color_Detection.takeSnapshot(Color_Detection__REDBALL);
-   cycles = 2;
+   //cycles = 2;
   
-  if(blueNum > 0 || redNum > 0){
-    autoSpin = true;
-    elevatorUp();
-    wait(2, sec);
-  }else{
-    autoSpin = false;
-  }
+  //if(blueNum > 0 || redNum > 0){
+  //  autoSpin = true;
+  //  elevatorUp();
+  //  wait(2, sec);
+  //}else{
+  //  autoSpin = false;
+  //}
 }
 
 void moveRobot(){
@@ -66,6 +66,10 @@ void moveRobot(){
 }
 
 void stopMotors(){
+  if(!Controller1.ButtonA.pressing() && !Controller1.ButtonB.pressing()){
+    LArm.stop();
+    RArm.stop();
+  }  
   if(!Controller1.ButtonUp.pressing() && !Controller1.ButtonDown.pressing() && !Controller1.ButtonLeft.pressing() && !autoSpin){
     BElevator.stop();
     TElevator.stop();

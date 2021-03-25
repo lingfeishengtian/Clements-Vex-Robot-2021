@@ -2,13 +2,15 @@
 // Robot Configuration:
 // [Name]               [Type]        [Port(s)]
 // Controller1          controller                    
-// TLMotor              motor         12              
-// TRMotor              motor         13              
-// BRMotor              motor         9               
-// BLMotor              motor         10              
-// BElevator            motor         14              
-// TElevator            motor         11              
-// Color_Detection      vision        8               
+// TLMotor              motor         20              
+// TRMotor              motor         11              
+// BRMotor              motor         16              
+// BLMotor              motor         2               
+// BElevator            motor         12              
+// TElevator            motor         1               
+// Color_Detection      vision        15              
+// LArm                 motor         17              
+// RArm                 motor         18              
 // ---- END VEXCODE CONFIGURED DEVICES ----
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
@@ -92,6 +94,20 @@ void enableDebuggerMode(){
     debug_mode = 0x1;
 }
 
+void armPull(){
+  LArm.setVelocity(50, pct);
+  LArm.spin(fwd);
+  RArm.setVelocity(50, pct);
+  RArm.spin(reverse);
+}
+
+void armReject(){
+  LArm.setVelocity(50, pct);
+  LArm.spin(reverse);
+  RArm.setVelocity(50, pct);
+  RArm.spin(fwd);
+}
+
 void usercontrol(void) {
   Controller1.ButtonR1.pressed(changeSpeedGrow);
   Controller1.ButtonR2.pressed(changeSpeedShrink);
@@ -99,8 +115,11 @@ void usercontrol(void) {
   Controller1.ButtonL1.pressed(enableDebuggerMode);
 
   Controller1.ButtonUp.pressed(elevatorUp);
-  Controller1.ButtonDown.pressed(elevatorReject);
+  Controller1.ButtonDown.pressed(elevatorPush);
+  Controller1.ButtonLeft.pressed(elevatorReject);
 
+  Controller1.ButtonA.pressed(armPull);
+  Controller1.ButtonB.pressed(armReject);
 
   Color_Detection.setLedMode(vex::vision::ledMode::manual);
   Color_Detection.setLedColor(255, 255, 255);
@@ -121,7 +140,7 @@ void usercontrol(void) {
       moveRobot();
       cameraAutoSpin();
     }else{
-      moveArm();
+      mElevator();
     }
 
     stopMotors();

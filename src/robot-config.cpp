@@ -16,8 +16,8 @@ motor BLMotor = motor(PORT2, ratio18_1, false);
 motor BElevator = motor(PORT12, ratio18_1, false);
 motor TElevator = motor(PORT1, ratio18_1, false);
 /*vex-vision-config:begin*/
-signature Color_Detection__REDBALL = signature (1, 5957, 9929, 7943, -3073, -1111, -2092, 1.4, 0);
-signature Color_Detection__BLUEBALL = signature (2, -3497, -2313, -2906, 6553, 9279, 7916, 1.6, 0);
+signature Color_Detection__REDBALL = signature (1, 5767, 8917, 7342, -103, 1437, 667, 1.4, 0);
+signature Color_Detection__BLUEBALL = signature (2, -4347, -3091, -3719, 12497, 16543, 14520, 1.4, 0);
 signature Color_Detection__SIG_3 = signature (3, 0, 0, 0, 0, 0, 0, 3, 0);
 signature Color_Detection__SIG_4 = signature (4, 0, 0, 0, 0, 0, 0, 3, 0);
 signature Color_Detection__SIG_5 = signature (5, 0, 0, 0, 0, 0, 0, 3, 0);
@@ -25,6 +25,8 @@ signature Color_Detection__SIG_6 = signature (6, 0, 0, 0, 0, 0, 0, 3, 0);
 signature Color_Detection__SIG_7 = signature (7, 0, 0, 0, 0, 0, 0, 3, 0);
 vision Color_Detection = vision (PORT15, 50, Color_Detection__REDBALL, Color_Detection__BLUEBALL, Color_Detection__SIG_3, Color_Detection__SIG_4, Color_Detection__SIG_5, Color_Detection__SIG_6, Color_Detection__SIG_7);
 /*vex-vision-config:end*/
+motor LArm = motor(PORT17, ratio18_1, false);
+motor RArm = motor(PORT18, ratio18_1, false);
 
 // VEXcode generated functions
 // define variable for remote controller enable/disable

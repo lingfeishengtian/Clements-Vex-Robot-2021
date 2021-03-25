@@ -20,6 +20,8 @@ extern signature Color_Detection__SIG_5;
 extern signature Color_Detection__SIG_6;
 extern signature Color_Detection__SIG_7;
 extern vision Color_Detection;
+extern motor LArm;
+extern motor RArm;
 
 /**
  * Used to initialize code/tasks/devices added using tools in VEXcode Pro.
