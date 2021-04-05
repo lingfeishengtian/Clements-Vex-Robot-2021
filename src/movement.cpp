@@ -8,13 +8,48 @@ Mode currentMode = DRIVE;
 double speed = 1.0;
 
 
+void forward(double x){
+  TLMotor.setVelocity(20, pct);
+  TRMotor.setVelocity(20, pct);
+  BLMotor.setVelocity(20, pct);
+  BRMotor.setVelocity(20, pct);
+  TLMotor.spinFor(fwd, x, sec);
+  TRMotor.spinFor(reverse, x, sec);
+  BLMotor.spinFor(fwd, x, sec);
+  BRMotor.spinFor(reverse, x, sec);   
+}
+
+void left(){
+  double x = 1.5;
+  TLMotor.setVelocity(20, pct);
+  TRMotor.setVelocity(20, pct);
+  BLMotor.setVelocity(20, pct);
+  BRMotor.setVelocity(20, pct);
+  TLMotor.spinFor(fwd, x, sec);
+  TRMotor.spinFor(fwd, x, sec);
+  BLMotor.spinFor(fwd, x, sec);
+  BRMotor.spinFor(fwd, x, sec);
+}
+
+void right(){
+  double x = 1.5;
+  TLMotor.setVelocity(20, pct);
+  TRMotor.setVelocity(20, pct);
+  BLMotor.setVelocity(20, pct);
+  BRMotor.setVelocity(20, pct);
+  TLMotor.spinFor(reverse, x, sec);
+  TRMotor.spinFor(reverse, x, sec);
+  BLMotor.spinFor(reverse, x, sec);
+  BRMotor.spinFor(reverse, x, sec);
+}
+
 bool autoSpin = false;
 
 void elevatorReject(){
   BElevator.setVelocity(40 * speed, pct);
   BElevator.spin(reverse);
   TElevator.setVelocity(40 * speed, pct);
-  TElevator.spin(forward);
+  TElevator.spin(fwd);
 }
 
 void elevatorUp(){
@@ -26,9 +61,9 @@ TElevator.setVelocity(40 * speed, pct);
 
 void elevatorPush(){
   BElevator.setVelocity(40 * speed, pct);
-  BElevator.spin(forward);
+  BElevator.spin(fwd);
   TElevator.setVelocity(40 * speed, pct);
-  TElevator.spin(forward);
+  TElevator.spin(fwd);
 }
 uint32_t blueNum;
 uint32_t redNum;
@@ -59,18 +94,18 @@ void moveRobot(){
     TRMotor.setVelocity(rightvelocity * speed - horizon, percent);
     BLMotor.setVelocity(leftvelocity * speed - horizon, percent);
     BRMotor.setVelocity(rightvelocity * speed + horizon, percent);
-    TLMotor.spin(forward);
+    TLMotor.spin(fwd);
     TRMotor.spin(reverse);
-    BLMotor.spin(forward);
+    BLMotor.spin(fwd);
     BRMotor.spin(reverse);
 }
 
 void stopMotors(){
-  if(!Controller1.ButtonA.pressing() && !Controller1.ButtonB.pressing()){
+  if(!Controller1.ButtonR1.pressing() && !Controller1.ButtonR2.pressing()){
     LArm.stop();
     RArm.stop();
   }  
-  if(!Controller1.ButtonUp.pressing() && !Controller1.ButtonDown.pressing() && !Controller1.ButtonLeft.pressing() && !autoSpin){
+  if(!Controller1.ButtonL1.pressing() && !Controller1.ButtonL2.pressing() && !Controller1.ButtonDown.pressing() && !autoSpin){
     BElevator.stop();
     TElevator.stop();
   }  

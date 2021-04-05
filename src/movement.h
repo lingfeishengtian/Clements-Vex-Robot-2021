@@ -19,3 +19,6 @@ void cameraAutoSpin();
 void elevatorReject();
 void elevatorUp();
 void elevatorPush();
+void forward();
+void left();
+void right();
