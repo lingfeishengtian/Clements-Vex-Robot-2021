@@ -4,19 +4,17 @@
 
 using namespace vex;
 
-Mode currentMode = DRIVE;
+void wheelsSetVelocity(int, int, int);
+void spinWheelsFor(double);
+
+double elevSpeed = 1.5;
 double speed = 1.0;
 
+bool autoSpin = false;
 
-void forward(double x){
-  TLMotor.setVelocity(20, pct);
-  TRMotor.setVelocity(20, pct);
-  BLMotor.setVelocity(20, pct);
-  BRMotor.setVelocity(20, pct);
-  TLMotor.spinFor(fwd, x, sec);
-  TRMotor.spinFor(reverse, x, sec);
-  BLMotor.spinFor(fwd, x, sec);
-  BRMotor.spinFor(reverse, x, sec);   
+void mForward(double x){
+  wheelsSetVelocity(20, 20, 0);
+  spinWheelsFor(x);   
 }
 
 void left(){
@@ -43,26 +41,24 @@ void right(){
   BRMotor.spinFor(reverse, x, sec);
 }
 
-bool autoSpin = false;
-
 void elevatorReject(){
-  BElevator.setVelocity(40 * speed, pct);
+  BElevator.setVelocity(40 * elevSpeed, pct);
   BElevator.spin(reverse);
-  TElevator.setVelocity(40 * speed, pct);
+  TElevator.setVelocity(40 * elevSpeed, pct);
   TElevator.spin(fwd);
 }
 
 void elevatorUp(){
-  BElevator.setVelocity(40 * speed, pct);
+  BElevator.setVelocity(40 * elevSpeed, pct);
   BElevator.spin(reverse);
-TElevator.setVelocity(40 * speed, pct);
+  TElevator.setVelocity(40 * elevSpeed, pct);
   TElevator.spin(reverse);
 }
 
 void elevatorPush(){
-  BElevator.setVelocity(40 * speed, pct);
+  BElevator.setVelocity(40 * elevSpeed, pct);
   BElevator.spin(fwd);
-  TElevator.setVelocity(40 * speed, pct);
+  TElevator.setVelocity(40 * elevSpeed, pct);
   TElevator.spin(fwd);
 }
 uint32_t blueNum;
@@ -86,26 +82,42 @@ void cameraAutoSpin(){
   //}
 }
 
-void moveRobot(){
-    int leftvelocity = Controller1.Axis2.position(percentUnits::pct)/5 + Controller1.Axis4.position(percentUnits::pct)/5;
-    int rightvelocity = Controller1.Axis2.position(percentUnits::pct)/5 - Controller1.Axis4.position(percentUnits::pct)/5;
-    int horizon = (Controller1.Axis1.position(percentUnits::pct)/5 * speed);
-    TLMotor.setVelocity(leftvelocity * speed + horizon, percent);
-    TRMotor.setVelocity(rightvelocity * speed - horizon, percent);
-    BLMotor.setVelocity(leftvelocity * speed - horizon, percent);
-    BRMotor.setVelocity(rightvelocity * speed + horizon, percent);
+void wheelsSetVelocity(int leftVelocity, int rightVelocity, int horizontal){
+    TLMotor.setVelocity(leftVelocity * speed + horizontal, percent);
+    TRMotor.setVelocity(rightVelocity * speed - horizontal, percent);
+    BLMotor.setVelocity(leftVelocity * speed - horizontal, percent);
+    BRMotor.setVelocity(rightVelocity * speed + horizontal, percent);
+}
+/**
+ *  If sec is 0, function will make wheels spin until manually stopped
+ **/
+void spinWheelsFor(double sec){
     TLMotor.spin(fwd);
     TRMotor.spin(reverse);
     BLMotor.spin(fwd);
     BRMotor.spin(reverse);
+  if(sec > 0){
+    wait(sec, seconds);
+    stopMotors();
+  }
+}
+
+void moveRobot(){
+    int leftvelocity = Controller1.Axis2.position(percentUnits::pct)/5 + Controller1.Axis4.position(percentUnits::pct)/5;
+    int rightvelocity = Controller1.Axis2.position(percentUnits::pct)/5 - Controller1.Axis4.position(percentUnits::pct)/5;
+    int horizon = (Controller1.Axis1.position(percentUnits::pct)/5 * speed);
+
+    wheelsSetVelocity(leftvelocity, rightvelocity, horizon);
+
+    spinWheelsFor(0);
 }
 
 void stopMotors(){
-  if(!Controller1.ButtonR1.pressing() && !Controller1.ButtonR2.pressing()){
+  if(!Controller1.ButtonR1.pressing() && !Controller1.ButtonL1.pressing()){
     LArm.stop();
     RArm.stop();
   }  
-  if(!Controller1.ButtonL1.pressing() && !Controller1.ButtonL2.pressing() && !Controller1.ButtonDown.pressing() && !autoSpin){
+  if(!Controller1.ButtonL2.pressing() && !Controller1.ButtonR2.pressing() && !Controller1.ButtonDown.pressing() && !autoSpin){
     BElevator.stop();
     TElevator.stop();
   }  
@@ -117,20 +129,14 @@ void stopMotors(){
   }
 }
 
-void mElevator(){
-  
- 
-}
-
-
 void updateControllerStats(){
   Controller1.Screen.clearScreen();
   Controller1.Screen.setCursor(1,1);
-  Controller1.Screen.print("Speed: %f", speed);
+  Controller1.Screen.print("GS: %.2fx ES: %.2fx", speed, elevSpeed);
   Controller1.Screen.newLine();
   Controller1.Screen.print("R: %d B: %d ", redNum, blueNum);
   Controller1.Screen.newLine();
-  Controller1.Screen.print("R&B：%d", rednblueNum);
+  Controller1.Screen.print("Time：%f", Brain.Timer.value());
   Controller1.Screen.newLine();
 
 
@@ -180,4 +186,13 @@ void changeSpeedGrow(){
 void changeSpeedShrink(){
   speed -= 0.1;
   if(speed < 0) speed = 0;
+}
+
+void changeElevSpeedGrow(){
+  elevSpeed += 0.1;
+}
+
+void changeElevSpeedShrink(){
+  elevSpeed -= 0.1;
+  if(elevSpeed < 0) elevSpeed = 0;
 }

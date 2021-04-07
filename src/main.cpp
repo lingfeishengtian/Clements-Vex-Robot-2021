@@ -12,34 +12,6 @@
 // LArm                 motor         17              
 // RArm                 motor         18              
 // ---- END VEXCODE CONFIGURED DEVICES ----
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// Controller1          controller                    
-// TLMotor              motor         20              
-// TRMotor              motor         11              
-// BRMotor              motor         16              
-// BLMotor              motor         2               
-// BElevator            motor         12              
-// TElevator            motor         1               
-// Color_Detection      vision        15              
-// LArm                 motor         17              
-// RArm                 motor         18              
-// ---- END VEXCODE CONFIGURED DEVICES ----
-// ---- START VEXCODE CONFIGURED DEVICES ----
-// Robot Configuration:
-// [Name]               [Type]        [Port(s)]
-// Controller1          controller                    
-// TLMotor              motor         20              
-// TRMotor              motor         11              
-// BRMotor              motor         16              
-// BLMotor              motor         2               
-// BElevator            motor         12              
-// TElevator            motor         1               
-// Color_Detection      vision        15              
-// LArm                 motor         17              
-// RArm                 motor         18              
-// ---- END VEXCODE CONFIGURED DEVICES ----
 /*----------------------------------------------------------------------------*/
 /*                                                                            */
 /*    Module:       main.cpp                                                  */
@@ -89,9 +61,8 @@ void pre_auton(void) {
 /*---------------------------------------------------------------------------*/
 
 void autonomous(void) {
-  // ..........................................................................
-  // Insert autonomous user code here.
-  // ..........................................................................
+  mForward(2);
+  while(1){}
 }
 
 /*---------------------------------------------------------------------------*/
@@ -104,14 +75,6 @@ void autonomous(void) {
 /*  You must modify the code to add your own robot specific commands here.   */
 /*--
 -------------------------------------------------------------------------*/
-
-void changeMode(){
-  if(currentMode == RAMP){
-    currentMode = DRIVE;
-  }else{
-    currentMode = RAMP;
-  }
-}
 
 int8_t debug_mode = 0;
 
@@ -138,16 +101,16 @@ void armReject(){
 
 void usercontrol(void) {
   Controller1.ButtonR1.pressed(armPull);
-  Controller1.ButtonR2.pressed(armReject);
-  Controller1.ButtonX.pressed(changeMode);
-  //Controller1.ButtonL1.pressed(enableDebuggerMode);
+  Controller1.ButtonR2.pressed(elevatorUp);
 
-  Controller1.ButtonL1.pressed(elevatorUp);
+  Controller1.ButtonL1.pressed(armReject);
   Controller1.ButtonDown.pressed(elevatorPush);
   Controller1.ButtonL2.pressed(elevatorReject);
 
   Controller1.ButtonA.pressed(changeSpeedGrow);
   Controller1.ButtonB.pressed(changeSpeedShrink);
+  Controller1.ButtonX.pressed(changeElevSpeedGrow);
+  Controller1.ButtonY.pressed(changeElevSpeedShrink);
 
   Color_Detection.setLedMode(vex::vision::ledMode::manual);
   Color_Detection.setLedColor(255, 255, 255);
@@ -164,13 +127,8 @@ void usercontrol(void) {
     // ........................................................................
     
     updateControllerStats();
-    if(currentMode == DRIVE){
       moveRobot();
       cameraAutoSpin();
-    }else{
-      mElevator();
-    }
-
 
     stopMotors();
     wait(100, msec); // Sleep the task for a short amount of time to
