@@ -8,37 +8,34 @@ void wheelsSetVelocity(int, int, int);
 void spinWheelsFor(double);
 
 double elevSpeed = 1.5;
-double speed = 1.0;
+double speed = 1.5;
 
 bool autoSpin = false;
 
 void mForward(double x){
-  wheelsSetVelocity(20, 20, 0);
+  int veloc = (x < 0) ? -38 : 38;
+  wheelsSetVelocity(veloc, veloc, 0);
+  spinWheelsFor(x * (x < 0 ? -1 : 1));   
+}
+
+void mSide(double x){
+  wheelsSetVelocity(0, 0, (x < 0) ? 40 : -40);
   spinWheelsFor(x);   
 }
 
-void left(){
-  double x = 1.5;
-  TLMotor.setVelocity(20, pct);
-  TRMotor.setVelocity(20, pct);
-  BLMotor.setVelocity(20, pct);
-  BRMotor.setVelocity(20, pct);
-  TLMotor.spinFor(fwd, x, sec);
-  TRMotor.spinFor(fwd, x, sec);
-  BLMotor.spinFor(fwd, x, sec);
-  BRMotor.spinFor(fwd, x, sec);
+void mRotate(double deg){
+  int lV = round((deg / 180.0) * 40);
+  int rV = round((deg / 180.0) * 40) * -1;
+
+  wheelsSetVelocity(lV, rV, 0);
+  spinWheelsFor(1);
 }
 
-void right(){
-  double x = 1.5;
-  TLMotor.setVelocity(20, pct);
-  TRMotor.setVelocity(20, pct);
-  BLMotor.setVelocity(20, pct);
-  BRMotor.setVelocity(20, pct);
-  TLMotor.spinFor(reverse, x, sec);
-  TRMotor.spinFor(reverse, x, sec);
-  BLMotor.spinFor(reverse, x, sec);
-  BRMotor.spinFor(reverse, x, sec);
+void mPullBall(double waitFor){
+  armPull();
+  elevatorUp();
+  wait(waitFor, sec);
+  stopMotors();
 }
 
 void elevatorReject(){
@@ -66,7 +63,6 @@ uint32_t redNum;
 uint32_t rednblueNum;
 uint32_t cycles;
 
-
 void cameraAutoSpin(){
    blueNum = Color_Detection.takeSnapshot(Color_Detection__BLUEBALL);
    redNum = Color_Detection.takeSnapshot(Color_Detection__REDBALL);
@@ -80,6 +76,20 @@ void cameraAutoSpin(){
   //}else{
   //  autoSpin = false;
   //}
+}
+
+void armPull(){
+  LArm.setVelocity(50, pct);
+  LArm.spin(reverse);
+  RArm.setVelocity(50, pct);
+  RArm.spin(reverse);
+}
+
+void armReject(){
+  LArm.setVelocity(50, pct);
+  LArm.spin(fwd);
+  RArm.setVelocity(50, pct);
+  RArm.spin(fwd);
 }
 
 void wheelsSetVelocity(int leftVelocity, int rightVelocity, int horizontal){
@@ -141,16 +151,6 @@ void updateControllerStats(){
 
 
   double batPercent = Brain.Battery.capacity();
-  if(debug_mode){
-    Brain.Screen.clearScreen();
-    Brain.Screen.setCursor(1, 1);
-    Brain.Screen.print("Welcome to Developer Mode");
-    Brain.Screen.newLine();
-    Brain.Screen.print("Battery: %.2f%%  Timer: %f", batPercent, Brain.Timer.value());
-    Brain.Screen.newLine();
-    Brain.Screen.print("Camera Timestamp: %.2f%%", Color_Detection.timestamp());
-    Brain.Screen.newLine();
-  }else{
     Brain.Screen.clearScreen();
     Brain.Screen.setCursor(1, 1);
     Brain.Screen.print("Battery: %.2f%%  Timer: %f", batPercent, Brain.Timer.value());
@@ -176,7 +176,6 @@ void updateControllerStats(){
     Brain.Screen.drawLine(200, 220, 210, 225);
     Brain.Screen.drawLine(210, 225, 230, 225);
     Brain.Screen.drawLine(230, 225, 240, 220);
-  }
 }
 
 void changeSpeedGrow(){

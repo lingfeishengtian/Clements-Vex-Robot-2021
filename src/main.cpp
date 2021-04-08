@@ -30,6 +30,8 @@ using namespace vex;
 // A global instance of competition
 competition Competition;
 
+void autonomous();
+
 // define your global instances of motors and other devices here
 
 /*---------------------------------------------------------------------------*/
@@ -42,10 +44,19 @@ competition Competition;
 /*  not every time that the robot is disabled.                               */
 /*---------------------------------------------------------------------------*/
 
+double var = 1.0;
+
+void redVel(){
+  var -= 0.1;
+}
+
+void incVel(){
+  var += 0.1;
+}
+
 void pre_auton(void) {
   // Initializing Robot Configuration. DO NOT REMOVE!
   vexcodeInit();
-
   // All activities that occur before the competition starts
   // Example: clearing encoders, setting servo positions, ...
 }
@@ -60,9 +71,31 @@ void pre_auton(void) {
 /*  You must modify the code to add your own robot specific commands here.   */
 /*---------------------------------------------------------------------------*/
 
+
 void autonomous(void) {
-  mForward(2);
-  while(1){}
+
+  // Move forward
+  mForward(0.58);
+  // Rotate -135 degrees
+  mRotate(-135);
+  // Move forward
+  mForward(0.7);
+  // Pull and push ball out
+  mPullBall(2.0);
+
+  mForward(0.5);
+
+  mPullBall(0.8);
+
+  mForward(-0.8);
+
+  mRotate(-45);
+  
+  mSide(1.6);
+
+  mForward(0.5);
+
+  mPullBall(2.0);
 }
 
 /*---------------------------------------------------------------------------*/
@@ -75,29 +108,6 @@ void autonomous(void) {
 /*  You must modify the code to add your own robot specific commands here.   */
 /*--
 -------------------------------------------------------------------------*/
-
-int8_t debug_mode = 0;
-
-void enableDebuggerMode(){
-  if(debug_mode)
-    debug_mode = 0x0;
-  else
-    debug_mode = 0x1;
-}
-
-void armPull(){
-  LArm.setVelocity(50, pct);
-  LArm.spin(reverse);
-  RArm.setVelocity(50, pct);
-  RArm.spin(reverse);
-}
-
-void armReject(){
-  LArm.setVelocity(50, pct);
-  LArm.spin(fwd);
-  RArm.setVelocity(50, pct);
-  RArm.spin(fwd);
-}
 
 void usercontrol(void) {
   Controller1.ButtonR1.pressed(armPull);
@@ -112,6 +122,9 @@ void usercontrol(void) {
   Controller1.ButtonX.pressed(changeElevSpeedGrow);
   Controller1.ButtonY.pressed(changeElevSpeedShrink);
 
+  //Controller1.ButtonUp.pressed(autonomous);
+  Controller1.ButtonLeft.pressed(redVel);
+  Controller1.ButtonRight.pressed(incVel);
   Color_Detection.setLedMode(vex::vision::ledMode::manual);
   Color_Detection.setLedColor(255, 255, 255);
   Color_Detection.setLedBrightness(100);
@@ -127,10 +140,10 @@ void usercontrol(void) {
     // ........................................................................
     
     updateControllerStats();
-      moveRobot();
-      cameraAutoSpin();
-
+    moveRobot();
+    cameraAutoSpin();
     stopMotors();
+
     wait(100, msec); // Sleep the task for a short amount of time to
                     // prevent wasted resources.
   }
